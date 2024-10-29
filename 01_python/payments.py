@@ -66,7 +66,7 @@ def upload_to_s3(s3_client, bucket_name, file_name, data):
 def main():
     env_vars = load_environment_variables()
     schema = "samith_dblink_classicmodels"
-    table = "OFFICES"
+    table = "PAYMENTS"
 
     initialize_oracle_client(env_vars['oracle_client_path'])
     
