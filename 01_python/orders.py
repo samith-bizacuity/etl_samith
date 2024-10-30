@@ -39,7 +39,7 @@ def fetch_etl_batch_date(cursor):
         raise Exception("No ETL batch date found")
     return result[0]
 
-def fetch_offices_data(cursor, schema, table, etl_batch_date):
+def fetch_data(cursor, schema, table, etl_batch_date):
     query = f"SELECT {', '.join(tables[table])} FROM {table}@{schema} WHERE UPDATE_TIMESTAMP >= date '{etl_batch_date}'"
     try:
         cursor.execute(query)
@@ -78,7 +78,7 @@ def main():
     try:
         etl_batch_date = fetch_etl_batch_date(cursor)
         etl_batch_date = etl_batch_date.strftime('%Y-%m-%d')
-        rows, column_names = fetch_offices_data(cursor, schema, table, etl_batch_date)
+        rows, column_names = fetch_data(cursor, schema, table, etl_batch_date)
 
         file_name = f'{table}/{etl_batch_date}/{table}.csv'
         csv_data = write_data_to_csv(rows, column_names)
