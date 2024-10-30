@@ -7,18 +7,18 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 os.chdir(script_dir)
 
 # List of setup scripts that must run successfully before export scripts
-setup_scripts = ["etl_batch_update.py", "update-db-link.py"]
+setup_scripts = ["etl_batch_update.py", "etl_db_link.py"]
 
 # List of export scripts to run in parallel if setup scripts succeed
 export_scripts = [
-    "export-offices.py",
-    "export-customers.py",
-    "export-employees.py",
-    "export-payments.py",
-    "export-products.py",
-    "export-orders.py",
-    "export-productlines.py",
-    "export-orderdetails.py"
+    "offices.py",
+    "customers.py",
+    "employees.py",
+    "payments.py",
+    "products.py",
+    "orders.py",
+    "productlines.py",
+    "orderdetails.py"
 ]
 
 # Function to run a single script and capture output
