@@ -1,12 +1,12 @@
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
+import json
 
 # Set current directory as the working directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # List of scripts
-setup_scripts = ["etl_batch_update.py", "etl_db_link.py"]
 export_scripts = [
     "offices.py",
     "customers.py",
@@ -19,10 +19,10 @@ export_scripts = [
 ]
 
 # Function to run a single script
-def run_script(script_name):
+def run_script(script_name, etl_batch_date):
     try:
         subprocess.run(
-            ["python", script_name], capture_output=True, text=True, check=True
+            ["python", script_name, etl_batch_date], capture_output=True, text=True, check=True
         )
         return True
     except subprocess.CalledProcessError as e:
@@ -30,9 +30,9 @@ def run_script(script_name):
         return False
 
 # Main function to execute all export scripts in parallel
-def run_export_scripts():
+def run_export_scripts(etl_batch_date):
     with ThreadPoolExecutor() as executor:
-        futures = {executor.submit(run_script, script): script for script in export_scripts}
+        futures = {executor.submit(run_script, script, etl_batch_date): script for script in export_scripts}
         
         for future in as_completed(futures):
             script = futures[future]
@@ -43,13 +43,14 @@ def run_export_scripts():
                 print(f"{script} generated an exception: {e}")
 
 if __name__ == "__main__":
-    # Run setup scripts sequentially
-    print("Running setup scripts...")
-    for setup_script in setup_scripts:
-        if not run_script(setup_script):
-            print("Setup script failed. Stopping execution.")
-            exit(1)  # Exit the script if any setup script fails
+    
+    # Fetch ETL variables
+    subprocess.run(["python", "redshift_get_etl_variables.py"], capture_output=True, text=True, check=True)
 
-    # If setup scripts succeed, proceed to run export scripts in parallel
+    with open('etl_variables.json', 'r') as f:
+        etl_variables = json.load(f)
+        etl_batch_date = etl_variables['etl_batch_date']
+
+    # Run export scripts in parallel
     print("Running export scripts in parallel...")
-    run_export_scripts()
+    run_export_scripts(etl_batch_date)

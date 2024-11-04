@@ -5,6 +5,8 @@ import os
 import boto3
 from dotenv import load_dotenv
 import io
+import sys
+from datetime import datetime
 from tables import tables
 
 def load_environment_variables():
@@ -30,14 +32,6 @@ def connect_to_oracle(user, password, dsn):
     except Exception as e:
         print(f"An error occurred while connecting to Oracle DB: {e}")
         return None
-
-def fetch_etl_batch_date(cursor):
-    query = "SELECT etl_batch_date FROM etl_batch_control"
-    cursor.execute(query)
-    result = cursor.fetchone()
-    if result is None:
-        raise Exception("No ETL batch date found")
-    return result[0]
 
 def fetch_data(cursor, schema, table, etl_batch_date):
     query = f"SELECT {', '.join(tables[table])} FROM {table}@{schema} WHERE UPDATE_TIMESTAMP >= date '{etl_batch_date}'"
@@ -76,8 +70,8 @@ def main():
 
     cursor = connection.cursor()
     try:
-        etl_batch_date = fetch_etl_batch_date(cursor)
-        etl_batch_date = etl_batch_date.strftime('%Y-%m-%d')
+        etl_batch_date = sys.argv[1]
+        etl_batch_date = datetime.strptime(etl_batch_date, "%Y-%m-%d").date()
         rows, column_names = fetch_data(cursor, schema, table, etl_batch_date)
 
         file_name = f'{table}/{etl_batch_date}/{table}.csv'
