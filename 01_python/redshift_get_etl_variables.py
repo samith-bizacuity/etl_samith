@@ -5,12 +5,14 @@ import json
 
 load_dotenv()
 
+redshift_host = os.getenv('REDSHIFT_HOST')
+redshift_database = os.getenv('REDSHIFT_DATABASE')
 redshift_user = os.getenv('REDSHIFT_USER')
 redshift_password = os.getenv('REDSHIFT_PASSWORD')
 
 conn = redshift_connector.connect(
-    host='default-workgroup.266735844846.eu-north-1.redshift-serverless.amazonaws.com',
-    database='h24samith',
+    host=redshift_host,
+    database=redshift_database,
     user=redshift_user,
     password=redshift_password,
 )
