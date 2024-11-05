@@ -8,14 +8,14 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 # List of scripts
 export_scripts = [
-    "offices.py",
-    "customers.py",
-    "employees.py",
-    "payments.py",
-    "products.py",
-    "orders.py",
-    "productlines.py",
-    "orderdetails.py"
+    "oracle_to_s3/offices.py",
+    "oracle_to_s3/customers.py",
+    "oracle_to_s3/employees.py",
+    "oracle_to_s3/payments.py",
+    "oracle_to_s3/products.py",
+    "oracle_to_s3/orders.py",
+    "oracle_to_s3/productlines.py",
+    "oracle_to_s3/orderdetails.py"
 ]
 
 # Function to run a single script
@@ -45,7 +45,7 @@ def run_export_scripts(etl_batch_date):
 if __name__ == "__main__":
     
     # Fetch ETL variables
-    subprocess.run(["python", "redshift_get_etl_variables.py"], capture_output=True, text=True, check=True)
+    subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
 
     with open('etl_variables.json', 'r') as f:
         etl_variables = json.load(f)

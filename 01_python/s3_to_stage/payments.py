@@ -1,7 +1,7 @@
 import os
 import subprocess
 from dotenv import load_dotenv
-import json
+import sys
 import redshift_connector
 from tables import tables
 
@@ -33,18 +33,13 @@ def connect_to_redshift(host, database, user, password):
     
 def main():
     env_vars = load_environment_variables()
-    table = 'OFFICES'
+    table = 'PAYMENTS'
 
     redshift_conn = connect_to_redshift(env_vars['redshift_host'], env_vars['redshift_database'], env_vars['redshift_user'], env_vars['redshift_password'])
     s3_bucket = env_vars['s3_bucket_name']
     iam_role = env_vars['iam_role']
 
-    # Fetch ETL variables
-    subprocess.run(["python", "redshift_get_etl_variables.py"], capture_output=True, text=True, check=True)
-
-    with open('etl_variables.json', 'r') as f:
-        etl_variables = json.load(f)
-        etl_batch_date = etl_variables['etl_batch_date']
+    etl_batch_date = sys.argv[1]
 
     try:
         cursor = redshift_conn.cursor()

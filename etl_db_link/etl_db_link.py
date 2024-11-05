@@ -2,8 +2,8 @@ import os
 import oracledb
 from dotenv import load_dotenv
 
-schema= "cm_20050610"
-schema_pw= "cm_20050610123"
+schema= "cm_20050611"
+schema_pw= "cm_20050611123"
 
 def load_environment_variables():
     load_dotenv()
