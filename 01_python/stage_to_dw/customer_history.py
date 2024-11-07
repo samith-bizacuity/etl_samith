@@ -1,7 +1,6 @@
 import os
-import subprocess
 from dotenv import load_dotenv
-import json
+import sys
 import redshift_connector
 from queries import queries
 
@@ -30,6 +29,9 @@ def connect_to_redshift(host, database, user, password):
         return None
     
 def main():
+    print(sys.argv)
+    exit()
+
     env_vars = load_environment_variables()
     table = 'CUSTOMER_HISTORY'
     query_update = queries[table][0]
@@ -38,12 +40,8 @@ def main():
     redshift_conn = connect_to_redshift(env_vars['redshift_host'], env_vars['redshift_database'], env_vars['redshift_user'], env_vars['redshift_password'])
 
     # Fetch ETL variables
-    subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
-
-    with open('etl_variables.json', 'r') as f:
-        etl_variables = json.load(f)
-        etl_batch_no = etl_variables['etl_batch_no']
-        etl_batch_date = etl_variables['etl_batch_date']
+    etl_batch_no = int(sys.argv[1])
+    etl_batch_date = sys.argv[2]    
 
     try:
         cursor = redshift_conn.cursor()

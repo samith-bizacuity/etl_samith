@@ -1,7 +1,6 @@
 import os
-import subprocess
 from dotenv import load_dotenv
-import json
+import sys
 import redshift_connector
 from queries import queries
 
@@ -31,25 +30,18 @@ def connect_to_redshift(host, database, user, password):
     
 def main():
     env_vars = load_environment_variables()
-    table = 'PRODUCTLINES'
-    query_update = queries[table][0]
-    query_insert = queries[table][1]
+    table = 'PAYMENTS'
+    query = queries[table][0]
 
     redshift_conn = connect_to_redshift(env_vars['redshift_host'], env_vars['redshift_database'], env_vars['redshift_user'], env_vars['redshift_password'])
 
     # Fetch ETL variables
-    subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
-
-    with open('etl_variables.json', 'r') as f:
-        etl_variables = json.load(f)
-        etl_batch_no = etl_variables['etl_batch_no']
-        etl_batch_date = etl_variables['etl_batch_date']
+    etl_batch_no = int(sys.argv[1])
+    etl_batch_date = sys.argv[2] 
 
     try:
         cursor = redshift_conn.cursor()
-        cursor.execute(query_update, (etl_batch_no, etl_batch_date))
-        redshift_conn.commit()
-        cursor.execute(query_insert, (etl_batch_no, etl_batch_date))
+        cursor.execute(query, (etl_batch_no, etl_batch_date))
         redshift_conn.commit()
         print(f"Data successfully from devstage to devdw for {table} in Redshift")
     except Exception as e:
