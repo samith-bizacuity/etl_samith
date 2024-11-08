@@ -1,0 +1,39 @@
+import subprocess
+import os
+import json
+import datetime
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
+scripts = [
+    "start_batch.py",
+    "master_oracle_to_s3.py",
+    "master_s3_to_stage.py",
+    "master_stage_to_dw.py",
+    "end_batch.py"
+]
+
+start_time = datetime.datetime.now()
+print(f"ETL process started at: {start_time}")
+
+# Fetch ETL variables
+subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
+
+with open('etl_variables.json', 'r') as f:
+    etl_variables = json.load(f)
+    etl_batch_no = str(etl_variables['etl_batch_no'])
+    etl_batch_date = etl_variables['etl_batch_date']
+
+for script in scripts:
+    try:
+        subprocess.run(["python", script, etl_batch_no, etl_batch_date], capture_output=True, text=True, check=True)
+        print(f"{script} completed successfully")
+    except subprocess.CalledProcessError as e:
+        print(f"Error in {script}: {e.stderr}")
+        break
+
+end_time = datetime.datetime.now()
+print(f"ETL process ended at: {end_time}")
+
+print(f"\n ETL process for the batch no. {etl_batch_no} and batch date {etl_batch_date} completed successfully")
+print(f"\n Total time taken: {end_time - start_time}")

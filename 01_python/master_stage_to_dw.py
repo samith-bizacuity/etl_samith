@@ -2,6 +2,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import json
+import sys
 
 # Set current directory as the working directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -54,12 +55,8 @@ def run_script(script_name, etl_batch_no, etl_batch_date):
 
 def main():
     # Fetch ETL variables
-    subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
-
-    with open('etl_variables.json', 'r') as f:
-        etl_variables = json.load(f)
-        etl_batch_no = str(etl_variables['etl_batch_no'])
-        etl_batch_date = etl_variables['etl_batch_date']
+    etl_batch_no = sys.argv[1]
+    etl_batch_date = sys.argv[2]
 
     # First script to run
     first_script = 'stage_to_dw/offices.py'

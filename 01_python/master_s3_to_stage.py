@@ -2,6 +2,7 @@ import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import json
+import sys
 
 # Set current directory as the working directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -45,11 +46,8 @@ def run_export_scripts(etl_batch_date):
 if __name__ == "__main__":
     
     # Fetch ETL variables
-    subprocess.run(["python", "get_etl_variables.py"], capture_output=True, text=True, check=True)
-
-    with open('etl_variables.json', 'r') as f:
-        etl_variables = json.load(f)
-        etl_batch_date = etl_variables['etl_batch_date']
+    etl_batch_no = int(sys.argv[1])
+    etl_batch_date = sys.argv[2]
 
     # Run export scripts in parallel
     print("Running export scripts in parallel...")

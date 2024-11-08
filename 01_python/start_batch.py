@@ -1,8 +1,7 @@
 import os
 from dotenv import load_dotenv
-import sys
 import redshift_connector
-from queries import queries
+import sys
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -30,29 +29,27 @@ def connect_to_redshift(host, database, user, password):
     
 def main():
     env_vars = load_environment_variables()
-    table = 'CUSTOMER_HISTORY'
-    query_update = queries[table][0]
-    query_insert = queries[table][1]
+    etl_batch_no = int(sys.argv[1])
+    etl_batch_date = sys.argv[2]
+    query = f"""
+            INSERT INTO etl_metadata.batch_control_log 
+            (etl_batch_no, etl_batch_date, etl_batch_status, etl_batch_start_time)
+            VALUES 
+            ({etl_batch_no}, date '{etl_batch_date}', 'O', CURRENT_TIMESTAMP);"""
 
     redshift_conn = connect_to_redshift(env_vars['redshift_host'], env_vars['redshift_database'], env_vars['redshift_user'], env_vars['redshift_password'])
-
-    # Fetch ETL variables
-    etl_batch_no = int(sys.argv[1])
-    etl_batch_date = sys.argv[2]    
+    cursor = redshift_conn.cursor()
 
     try:
-        cursor = redshift_conn.cursor()
-        cursor.execute(query_update, (etl_batch_date, etl_batch_no, etl_batch_date))
+        cursor.execute(query)
         redshift_conn.commit()
-        cursor.execute(query_insert, (etl_batch_date, etl_batch_no, etl_batch_date))
-        redshift_conn.commit()
-        print(f"Data successfully from devstage to devdw for {table} in Redshift")
+        print(f"Batch Control Log updated successfully for ETL Batch No: {etl_batch_no}")
     except Exception as e:
-        print(f"An error occurred during loading data from devstage to devdw: {e}")
+        print(f"An error occurred while updating Batch Control Log: {e}")
     finally:
         cursor.close()
+        redshift_conn.close()
 
-    redshift_conn.close()
 
 if __name__ == "__main__":
     main()
