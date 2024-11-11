@@ -1,7 +1,7 @@
+# Imports
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
-import json
 import sys
 
 # Set current directory as the working directory
