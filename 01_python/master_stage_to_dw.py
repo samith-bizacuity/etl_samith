@@ -52,7 +52,6 @@ def run_script(script_name, etl_batch_no, etl_batch_date):
         print(f"Error in {script_name}: {e.stderr}")
         return False
 
-
 def main():
     # Fetch ETL variables
     etl_batch_no = sys.argv[1]
@@ -64,7 +63,6 @@ def main():
     # Run export scripts 
     print("Running export scripts...")
     run_script(first_script, etl_batch_no, etl_batch_date)
-
 
 if __name__ == "__main__":
     main()

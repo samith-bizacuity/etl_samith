@@ -39,4 +39,3 @@ print(f"ETL Batch No: {etl_batch_no} \n ETL batch date: {etl_batch_date}")
 with open('etl_variables.json', 'w') as f:
     json.dump({'etl_batch_no': etl_batch_no, 'etl_batch_date': etl_batch_date}, f)
     print("ETL variables written to etl_variables.py")
-
