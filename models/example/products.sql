@@ -1,4 +1,3 @@
--- models/insert_products.sql
 {{ config(
     materialized='incremental',  -- Use incremental model
     unique_key='src_productCode'  -- Key to check for new/updated rows
