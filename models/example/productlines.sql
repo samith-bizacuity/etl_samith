@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key='productline'
+    unique_key='productline',
+    schema='devdw'
 ) }}
 
 WITH source_data AS (

@@ -1,6 +1,7 @@
 {{ config(
     materialized='incremental',
-    unique_key='src_productCode'
+    unique_key='src_productCode',
+    schema='devdw'
 ) }}
 
 WITH new_data AS (
@@ -19,7 +20,7 @@ WITH new_data AS (
         1001 AS etl_batch_no,  -- Pass in ETL batch number via variable
         '2001-01-01' AS etl_batch_date -- Pass in ETL batch date via variable
     FROM {{ source('devstage', 'Products') }} A
-    JOIN devdw.ProductLines PL ON A.productLine = PL.productLine
+    JOIN {{ ref('productlines') }} PL ON A.productLine = PL.productLine
 )
 
 -- The main insert/select for incremental load
