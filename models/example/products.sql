@@ -1,6 +1,6 @@
 {{ config(
-    materialized='incremental',  -- Use incremental model
-    unique_key='src_productCode'  -- Key to check for new/updated rows
+    materialized='incremental',
+    unique_key='src_productCode'
 ) }}
 
 WITH new_data AS (
