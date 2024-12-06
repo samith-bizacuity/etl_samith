@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: devstage
+    schema: devstage
+    tables:
+      - name: Products
+        description: "The source Products table containing product data"
+        columns:
+          - name: productCode
+          - name: productName
+          - name: productLine
+          - name: productScale
+          - name: productVendor
+          - name: quantityInStock
+          - name: buyPrice
+          - name: MSRP
+          - name: create_timestamp
+          - name: update_timestamp
