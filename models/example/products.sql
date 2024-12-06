@@ -5,7 +5,7 @@
 
 WITH new_data AS (
     SELECT 
-        A.productCode,
+        A.productCode AS src_productCode,
         A.productName,
         A.productLine,
         A.productScale,
