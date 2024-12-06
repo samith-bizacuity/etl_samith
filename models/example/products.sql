@@ -19,14 +19,8 @@ WITH new_data AS (
         1001 AS etl_batch_no,  -- Pass in ETL batch number via variable
         '2001-01-01' AS etl_batch_date -- Pass in ETL batch date via variable
     FROM {{ source('devstage', 'Products') }} A
-    LEFT JOIN devdw.Products B ON A.productCode = B.src_productCode
-    JOIN devdw.ProductLines PL ON A.productLine = PL.productLine
-    WHERE B.src_productCode IS NULL
 )
 
 -- The main insert/select for incremental load
 SELECT * FROM new_data
 
-{% if is_incremental() %}
-    WHERE src_productCode NOT IN (SELECT src_productCode FROM {{ this }})
-{% endif %}
