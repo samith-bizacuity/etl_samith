@@ -10,7 +10,6 @@ WITH new_data AS (
         A.productLine,
         A.productScale,
         A.productVendor,
-        A.productDescription,
         A.quantityInStock,
         A.buyPrice,
         A.MSRP,
