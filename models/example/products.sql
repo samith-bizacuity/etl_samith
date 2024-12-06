@@ -29,6 +29,5 @@ WITH new_data AS (
 SELECT * FROM new_data
 
 {% if is_incremental() %}
-    -- This is for incremental mode; only insert new records
     WHERE src_productCode NOT IN (SELECT src_productCode FROM {{ this }})
 {% endif %}
