@@ -22,7 +22,6 @@ WITH combined_data AS (
     JOIN 
         {{ this }} AS e
         ON s.checkNumber = e.checkNumber
-        AND s.customerNumber = e.src_customerNumber
     JOIN 
         {{ ref('customers') }} C
         ON s.customerNumber = C.src_customerNumber
