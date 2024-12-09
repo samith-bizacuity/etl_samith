@@ -26,7 +26,7 @@ WITH combined_data AS (
         END AS dw_create_timestamp,
         CURRENT_TIMESTAMP AS dw_update_timestamp
     FROM
-        {{ source('devstage', 'offices') }} AS s
+        {{ source('devstage', 'Offices') }} AS s
     LEFT JOIN {{this}} AS e
         ON s.officeCode = e.officeCode
     CROSS JOIN {{ source('etl_metadata', 'batch_control') }} AS B
