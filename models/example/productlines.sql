@@ -16,9 +16,9 @@ WITH combined_data AS (
         B.etl_batch_date,
         CASE
             WHEN s.productline IS NOT NULL THEN CURRENT_TIMESTAMP
-            ELSE e.dw_update_timestamp
-        END AS dw_update_timestamp,
-        CURRENT_TIMESTAMP AS dw_create_timestamp
+            ELSE e.dw_create_timestamp
+        END AS dw_create_timestamp,
+        CURRENT_TIMESTAMP AS dw_update_timestamp
     FROM
         {{ source('devstage', 'ProductLines') }} AS s
     LEFT JOIN {{this}} AS e
