@@ -3,11 +3,7 @@
     unique_key='src_productCode'
 ) }}
 
-WITH etl_variables AS (
-    SELECT etl_batch_no, etl_batch_date
-    FROM {{ source('etl_metadata', 'batch_control') }}
-),
-new_data AS (
+WITH new_data AS (
     SELECT 
         A.productCode AS src_productCode,
         A.productName,
@@ -21,14 +17,17 @@ new_data AS (
         A.create_timestamp as src_create_timestamp,
         A.update_timestamp as src_update_timestamp,
         CURRENT_TIMESTAMP as dw_create_timestamp,
-        CURRENT_TIMESTAMP as dw_update_timestamp,
-        B.etl_batch_no AS etl_batch_no,  -- Pass in ETL batch number via variable
-        B.etl_batch_date AS etl_batch_date,  -- Pass in ETL batch date via variable
+        CASE
+            WHEN A.productline IS NOT NULL THEN CURRENT_TIMESTAMP
+            ELSE e.dw_update_timestamp
+        END AS dw_update_timestamp,
+        B.etl_batch_no,  -- Pass in ETL batch number via variable
+        B.etl_batch_date,  -- Pass in ETL batch date via variable
         ROW_NUMBER() OVER (ORDER BY A.productCode) + COALESCE(MAX(existing_data.dw_product_id) OVER (), 0) AS dw_product_id
     FROM {{ source('devstage', 'Products') }} A
     JOIN {{ ref('productlines') }} PL ON A.productLine = PL.productLine
-    LEFT JOIN {{ this }} existing_data ON A.productCode = existing_data.src_productCode
-    CROSS JOIN etl_variables B
+    LEFT JOIN {{ this }} e ON A.productCode = existing_data.src_productCode
+    CROSS JOIN {{ source('etl_metadata', 'batch_control') }} B
 )
 
 -- The main insert/select for incremental load
