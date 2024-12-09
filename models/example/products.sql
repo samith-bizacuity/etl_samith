@@ -19,7 +19,7 @@ WITH new_data AS (
         CURRENT_TIMESTAMP as dw_create_timestamp,
         CURRENT_TIMESTAMP as dw_update_timestamp,
         1001 AS etl_batch_no,  -- Pass in ETL batch number via variable
-        '2001-01-01' AS etl_batch_date,  -- Pass in ETL batch date via variable
+        TO_DATE('2001-01-01', 'YYYY-MM-DD') AS etl_batch_date,  -- Pass in ETL batch date via variable
         ROW_NUMBER() OVER (ORDER BY A.productCode) + COALESCE(MAX(existing_data.dw_product_id) OVER (), 0) AS dw_product_id
     FROM {{ source('devstage', 'Products') }} A
     JOIN {{ ref('productlines') }} PL ON A.productLine = PL.productLine
