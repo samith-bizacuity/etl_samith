@@ -3,55 +3,41 @@
     unique_key='productline'
 ) }}
 
-WITH source_data AS (
+WITH combined_data AS (
     SELECT
-        productline,
-        create_timestamp,
-        update_timestamp,
-        1001 AS etl_batch_no,
-        TO_DATE('2001-01-01', 'YYYY-MM-DD') AS etl_batch_date
-    FROM
-        devstage.productlines
-),
-
-existing_data AS (
-    SELECT
-        productline,
-        src_create_timestamp,
-        src_update_timestamp,
-        etl_batch_no,
-        etl_batch_date,
-        dw_update_timestamp,
-        dw_product_line_id
-    FROM
-        {{this}}  -- Refers to the current state of the table created by dbt
-),
-
-ranked_data AS (
-    SELECT
-        source_data.productline,
-        ROW_NUMBER() OVER (ORDER BY source_data.productline) + COALESCE(MAX(existing_data.dw_product_line_id) OVER (), 0) AS dw_product_line_id,
+        s.productline,
+        s.create_timestamp,
+        s.update_timestamp,
+        COALESCE(e.src_create_timestamp, s.create_timestamp) AS src_create_timestamp,
+        COALESCE(s.update_timestamp, e.src_update_timestamp) AS src_update_timestamp,
+        COALESCE(e.dw_product_line_id, 
+                 ROW_NUMBER() OVER (ORDER BY s.productline) + COALESCE(MAX(e.dw_product_line_id) OVER (), 0)) AS dw_product_line_id,
+        B.etl_batch_no,
+        B.etl_batch_date,
         CASE
-            WHEN source_data.productline IS NOT NULL AND existing_data.productline IS NULL THEN source_data.create_timestamp
-            ELSE existing_data.src_create_timestamp
-        END AS src_create_timestamp,
-        COALESCE(source_data.update_timestamp, existing_data.src_update_timestamp) AS src_update_timestamp,
-        1001 AS etl_batch_no,
-        TO_DATE('2001-01-01', 'YYYY-MM-DD') AS etl_batch_date,
-        CASE
-            WHEN source_data.productline IS NOT NULL THEN CURRENT_TIMESTAMP
-            ELSE existing_data.dw_update_timestamp
+            WHEN s.productline IS NOT NULL THEN CURRENT_TIMESTAMP
+            ELSE e.dw_update_timestamp
         END AS dw_update_timestamp,
         CURRENT_TIMESTAMP AS dw_create_timestamp
     FROM
-        source_data
-    LEFT JOIN existing_data ON source_data.productline = existing_data.productline
+        {{ source('devstage', 'ProductLines') }} AS s
+    LEFT JOIN {{this}} AS e
+        ON s.productline = e.productline
+    CROSS JOIN {{ source('etl_metadata', 'batch_control') }} AS B
 )
 
-SELECT *
-FROM ranked_data
+SELECT
+    productline,
+    dw_product_line_id,
+    src_create_timestamp,
+    src_update_timestamp,
+    etl_batch_no,
+    etl_batch_date,
+    dw_update_timestamp,
+    dw_create_timestamp
+FROM combined_data
 
 {% if is_incremental() %}
 WHERE
-    ranked_data.productline IS NOT NULL  -- Only process new or updated rows
+    productline IS NOT NULL  -- Only process new or updated rows
 {% endif %}
