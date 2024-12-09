@@ -37,7 +37,3 @@ SELECT
     dw_create_timestamp
 FROM combined_data
 
-{% if is_incremental() %}
-WHERE
-    productline IS NOT NULL  -- Only process new or updated rows
-{% endif %}

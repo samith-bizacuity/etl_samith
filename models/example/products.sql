@@ -34,6 +34,3 @@ WITH new_data AS (
 SELECT * 
 FROM new_data
 
-{% if is_incremental() %}
-    WHERE src_productCode NOT IN (SELECT src_productCode FROM {{ this }})
-{% endif %}
