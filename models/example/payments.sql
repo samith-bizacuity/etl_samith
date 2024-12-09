@@ -9,22 +9,23 @@ WITH combined_data AS (
         s.checkNumber,
         s.paymentDate,
         s.amount,
-        COALESCE(e.src_create_timestamp, s.create_timestamp) AS src_create_timestamp,
-        COALESCE(s.update_timestamp, e.src_update_timestamp) AS src_update_timestamp,
-        COALESCE(e.dw_payment_id, 
-                 ROW_NUMBER() OVER (ORDER BY s.checkNumber) + COALESCE(MAX(e.dw_payment_id) OVER (), 0)) AS dw_payment_id,
-        COALESCE(e.dw_customer_id, s.customerNumber) AS dw_customer_id,
+        s.create_timestamp AS src_create_timestamp,
+        s.update_timestamp AS src_update_timestamp,
+        ROW_NUMBER() OVER (ORDER BY s.checkNumber) + COALESCE(MAX(e.dw_payment_id) OVER (), 0) AS dw_payment_id,
+        C.dw_customer_id AS dw_customer_id,
         B.etl_batch_no,
         B.etl_batch_date,
-        CASE
-            WHEN s.checkNumber IS NOT NULL THEN CURRENT_TIMESTAMP
-            ELSE e.dw_create_timestamp
-        END AS dw_create_timestamp,
+        CURRENT_TIMESTAMP AS dw_create_timestamp,
         CURRENT_TIMESTAMP AS dw_update_timestamp
     FROM
         {{ source('devstage', 'Payments') }} AS s
-    LEFT JOIN {{this}} AS e
+    JOIN 
+        {{ this }} AS e
         ON s.checkNumber = e.checkNumber
+        AND s.customerNumber = e.src_customerNumber
+    JOIN 
+        {{ ref('customers') }} C
+        ON s.customerNumber = C.customerNumber
     CROSS JOIN {{ source('etl_metadata', 'batch_control') }} AS B
 )
 
