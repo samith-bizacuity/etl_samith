@@ -4,8 +4,13 @@ sources:
   - name: devstage
     schema: devstage
     tables:
+      - name: ProductLines
+        columns:
+          - name: productline
+          - name: create_timestamp
+          - name: update_timestamp
+
       - name: Products
-        description: "The source Products table containing product data"
         columns:
           - name: productCode
           - name: productName
