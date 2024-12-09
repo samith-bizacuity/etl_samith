@@ -1,6 +1,14 @@
 version: 2
 
 sources:
+  - name: etl_metadata
+    schema: etl_metadata
+    tables:
+      - name: batch_control
+        columns: 
+          - name: etl_batch_no
+          - name: etl_batch_date
+
   - name: devstage
     schema: devstage
     tables:
