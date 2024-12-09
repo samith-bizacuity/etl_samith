@@ -25,7 +25,7 @@ WITH combined_data AS (
         AND s.customerNumber = e.src_customerNumber
     JOIN 
         {{ ref('customers') }} C
-        ON s.customerNumber = C.customerNumber
+        ON s.customerNumber = C.src_customerNumber
     CROSS JOIN {{ source('etl_metadata', 'batch_control') }} AS B
 )
 
