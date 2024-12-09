@@ -30,7 +30,7 @@ with ranked_data as (
         end as dw_create_timestamp,
         row_number() over (order by sd.customernumber) + coalesce(max(ed.dw_customer_id) over (), 0) as dw_customer_id
     from
-        {{ source('devstage', 'Employees')}} sd
+        {{ source('devstage', 'Customers')}} sd
     left join {{ this }} ed on sd.customernumber = ed.src_customernumber
     left join {{ ref('employees') }} e on sd.salesrepemployeenumber = e.employeenumber
     cross join {{ source('etl_metadata', 'batch_control')}} em
