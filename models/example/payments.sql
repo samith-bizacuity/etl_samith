@@ -11,7 +11,7 @@ WITH combined_data AS (
         s.amount,
         s.create_timestamp AS src_create_timestamp,
         s.update_timestamp AS src_update_timestamp,
-        ROW_NUMBER() OVER (ORDER BY s.checkNumber) + COALESCE(MAX(e.dw_payment_id) OVER (), 0) AS dw_payment_id,
+        ROW_NUMBER() OVER () + COALESCE(MAX(e.dw_payment_id) OVER (), 0) AS dw_payment_id,
         C.dw_customer_id AS dw_customer_id,
         B.etl_batch_no,
         B.etl_batch_date,
