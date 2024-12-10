@@ -16,7 +16,7 @@ with ranked_data as (
         em.etl_batch_date,
         current_timestamp as dw_update_timestamp,
         case
-            when ed.src_ordernumber is null and ed.src_productcode is null then current_timestamp
+            when ed.src_orderNumber is null and ed.src_productCode is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
         row_number() over (order by sd.ordernumber, sd.productcode) + coalesce(max(ed.dw_orderdetail_id) over (), 0) as dw_orderdetail_id,
@@ -25,7 +25,7 @@ with ranked_data as (
     from
         {{ source('devstage', 'OrderDetails') }} sd
     left join {{ this }} ed on sd.ordernumber = ed.src_orderNumber and sd.productcode = ed.src_productCode
-    left join {{ ref('products') }} p on sd.productcode = p.productcode
+    left join {{ ref('products') }} p on sd.productcode = p.src_productcode
     left join {{ ref('orders') }} o on sd.ordernumber = o.src_ordernumber
     cross join {{ source('etl_metadata', 'batch_control') }} em
 )
