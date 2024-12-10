@@ -13,11 +13,11 @@ with ranked_data as (
         coalesce(sd.update_timestamp, ed.src_update_timestamp) as src_update_timestamp,
         em.etl_batch_no,
         em.etl_batch_date,
-        current_timestamp as dw_create_timestamp,
+        current_timestamp as dw_update_timestamp,
         case
-            when ed.checknumber is not null and ed.src_customernumber is not null then current_timestamp
-            else ed.dw_update_timestamp
-        end as dw_update_timestamp,
+            when ed.checknumber is null and ed.src_customernumber is null then current_timestamp
+            else ed.dw_create_timestamp
+        end as dw_create_timestamp,
         row_number() over (order by sd.checknumber) + coalesce(max(ed.dw_payment_id) over (), 0) as dw_payment_id
     from
         {{ source('devstage', 'Payments')}} sd

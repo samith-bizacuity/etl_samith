@@ -15,7 +15,7 @@ WITH combined_data AS (
         B.etl_batch_no,
         B.etl_batch_date,
         CASE
-            WHEN s.productline IS NOT NULL THEN CURRENT_TIMESTAMP
+            WHEN s.productline IS NULL THEN CURRENT_TIMESTAMP
             ELSE e.dw_create_timestamp
         END AS dw_create_timestamp,
         CURRENT_TIMESTAMP AS dw_update_timestamp
