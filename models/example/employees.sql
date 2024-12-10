@@ -57,7 +57,7 @@ select
     rd.dw_create_timestamp,
     rd.dw_update_timestamp,
     rd.dw_employee_id,
-    ur.dw_reporting_employee_id, rd.dw_reporting_employee_id as dw_reporting_employee_id
+    GREATEST(ur.dw_reporting_employee_id, rd.dw_reporting_employee_id) as dw_reporting_employee_id
 from
     ranked_data rd
 left join updated_reporting ur on rd.employeenumber = ur.employeenumber
