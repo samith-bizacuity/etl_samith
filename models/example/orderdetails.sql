@@ -25,7 +25,7 @@ with ranked_data as (
     from
         {{ source('devstage', 'OrderDetails') }} sd
     left join {{ this }} ed on sd.ordernumber = ed.src_orderNumber and sd.productcode = ed.src_productCode
-    left join {{ ref('products') }} p on sd.productcode = p.src_productcode
+    left join {{ ref('products') }} p on sd.productcode = p.productcode
     left join {{ ref('orders') }} o on sd.ordernumber = o.src_ordernumber
     cross join {{ source('etl_metadata', 'batch_control') }} em
 )
