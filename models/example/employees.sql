@@ -24,7 +24,7 @@ with ranked_data as (
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
         row_number() over (order by sd.employeenumber) + coalesce(max(ed.dw_employee_id) over (), 0) as dw_employee_id,
-        0 as dw_reporting_employee_id  
+        0 as dw_reporting_employee_id
     from
         {{ source('devstage', 'Employees')}} sd
     left join {{ this }} ed on sd.employeenumber = ed.employeenumber
@@ -57,7 +57,7 @@ select
     rd.dw_create_timestamp,
     rd.dw_update_timestamp,
     rd.dw_employee_id,
-    GREATEST(ur.dw_reporting_employee_id, rd.dw_reporting_employee_id) as dw_reporting_employee_id
+    ur.dw_reporting_employee_id, rd.dw_reporting_employee_id as dw_reporting_employee_id
 from
     ranked_data rd
 left join updated_reporting ur on rd.employeenumber = ur.employeenumber
