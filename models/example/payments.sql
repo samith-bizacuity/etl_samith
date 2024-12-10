@@ -1,6 +1,5 @@
 {{ config(
-    materialized='incremental',
-    unique_key='checknumber, src_customernumber'
+    materialized='incremental'
 ) }}
 
 with ranked_data as (
