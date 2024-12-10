@@ -27,7 +27,7 @@ with ranked_data as (
         {{ source('devstage', 'Orders') }} sd
     left join {{ this }} ed on sd.ordernumber = ed.src_ordernumber
     left join {{ source('etl_metadata', 'batch_control') }} em
-    left join {{ ref('customers') }} c ON sd.src_customerNumber = c.src_customerNumber
+    left join {{ ref('customers') }} c ON sd.customerNumber = c.src_customerNumber
 )
 
 select *
