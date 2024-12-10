@@ -21,10 +21,10 @@ with ranked_data as (
         end as dw_update_timestamp,
         row_number() over (order by sd.checknumber) + coalesce(max(ed.dw_payment_id) over (), 0) as dw_payment_id
     from
-        {{source('devstage', 'Payments')}} sd
-    left join {{ this }} ed on sd.checknumber = ed.checknumber
+        devstage.payments sd
+    left join devdw.payments ed on sd.checknumber = ed.checknumber
     join {{ ref('customers') }} c on sd.customernumber = c.src_customernumber
-    cross join {{ source('etl_metadata', 'batch_control')}} em
+    cross join etl_metadata.batch_control em
 )
 
 select *
