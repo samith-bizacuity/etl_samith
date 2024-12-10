@@ -16,7 +16,7 @@ with ranked_data as (
         em.etl_batch_date,
         current_timestamp as dw_update_timestamp,
         case
-            when ed.srd_ordernumber is null and ed.src_productcode is null then current_timestamp
+            when ed.src_ordernumber is null and ed.src_productcode is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
         row_number() over (order by sd.ordernumber, sd.productcode) + coalesce(max(ed.dw_orderdetail_id) over (), 0) as dw_orderdetail_id,
