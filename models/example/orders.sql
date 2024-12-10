@@ -22,11 +22,12 @@ with ranked_data as (
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
         row_number() over (order by sd.ordernumber) + coalesce(max(ed.dw_order_id) over (), 0) as dw_order_id,
-        coalesce(ed.dw_customer_id, sd.customernumber) as dw_customer_id
+        coalesce(ed.dw_customer_id, c.dw_customer_id) as dw_customer_id
     from
         {{ source('devstage', 'Orders') }} sd
     left join {{ this }} ed on sd.ordernumber = ed.src_ordernumber
     left join {{ source('etl_metadata', 'batch_control') }} em
+    join {{ ref('customers') }} c ON sd.src_customerNumber = c.src_customerNumber
 )
 
 select *
