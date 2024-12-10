@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key=['src_orderNumber, src_productCode']
+    unique_key=['src_orderNumber']
 ) }}
 
 with ranked_data as (
