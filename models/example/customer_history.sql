@@ -27,8 +27,6 @@ updated_customers as (
         ch.creditLimit,
         ch.create_etl_batch_no,
         ch.create_etl_batch_date,
-        ch.update_etl_batch_no,
-        ch.update_etl_batch_date,
         ch.dw_update_timestamp,
         case
             when C.creditLimit <> ch.creditLimit then 0  -- mark for update
@@ -75,12 +73,8 @@ select
     dw_customer_id,
     creditLimit,
     etl_batch_date as effective_from_date,
-    null as effective_to_date,
     1 as dw_active_record_ind,
     etl_batch_no as create_etl_batch_no,
     etl_batch_date as create_etl_batch_date,
-    null as update_etl_batch_no,
-    null as update_etl_batch_date,
-    null as dw_update_timestamp
 from
     new_customers
