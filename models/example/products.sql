@@ -33,7 +33,3 @@ WITH new_data AS (
 -- The main insert/select for incremental load
 SELECT * 
 FROM new_data
-
-{% if is_incremental() %}
-    WHERE new_data.src_productCode IS NOT NULL
-{% endif %}
