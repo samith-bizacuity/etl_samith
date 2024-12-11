@@ -47,7 +47,7 @@ updated_customers as (
             else ch.update_etl_batch_date
         end as update_etl_batch_date,
         case
-            when C.creditLimit <> ch.creditLimit then current_timestamp - INTERVAL '1 day'
+            when C.creditLimit <> ch.creditLimit then B.etl_batch_date - INTERVAL '1 day'
             else ch.effective_to_date
         end as updated_effective_to_date
     from
