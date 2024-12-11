@@ -18,7 +18,7 @@ WITH new_data AS (
         A.update_timestamp as src_update_timestamp,
         CURRENT_TIMESTAMP as dw_update_timestamp,
         CASE
-            WHEN A.productCode IS NULL THEN CURRENT_TIMESTAMP
+            WHEN e.src_productCode IS NULL THEN CURRENT_TIMESTAMP
             ELSE e.dw_create_timestamp
         END AS dw_create_timestamp,
         B.etl_batch_no,  -- Pass in ETL batch number via variable
