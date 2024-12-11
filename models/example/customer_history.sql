@@ -9,7 +9,8 @@ with new_customers as (
         C.dw_customer_id,
         C.creditLimit,
         B.etl_batch_no,
-        B.etl_batch_date
+        B.etl_batch_date,
+        C.dw_create_timestamp
     from
         {{ ref('customers') }} C
     left join {{ this }} ch on C.dw_customer_id = ch.dw_customer_id
@@ -27,7 +28,7 @@ updated_customers as (
         ch.creditLimit,
         ch.create_etl_batch_no,
         ch.create_etl_batch_date,
-        ch.dw_update_timestamp,
+        ch.dw_create_timestamp,
         case
             when C.creditLimit <> ch.creditLimit then 0  -- mark for update
             else ch.dw_active_record_ind
@@ -66,6 +67,7 @@ select
     create_etl_batch_date,
     update_etl_batch_no,
     update_etl_batch_date,
+    dw_create_timestamp,
     updated_dw_update_timestamp as dw_update_timestamp
 from
     updated_customers
@@ -80,6 +82,7 @@ select
     etl_batch_date as create_etl_batch_date,
     null as update_etl_batch_no,
     null as update_etl_batch_date,
+    dw_create_timestamp,
     null as dw_update_timestamp
 from
     new_customers
