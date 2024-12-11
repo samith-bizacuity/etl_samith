@@ -105,7 +105,7 @@ union all
 select dw_customer_id,
         creditLimit,
         effective_from_date,
-        null as effective_to_date
+        null as effective_to_date,
         dw_active_record_ind,
         create_etl_batch_no,
         create_etl_batch_date,
