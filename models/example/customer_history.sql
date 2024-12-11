@@ -14,8 +14,9 @@ with new_customers as (
     from
         {{ ref('customers') }} C
     left join {{ this }} ch on C.dw_customer_id = ch.dw_customer_id
+                            and ch.dw_active_record_ind = 1
     cross join {{ source('etl_metadata', 'batch_control') }} B
-    where ch.dw_customer_id is null or ch.dw_active_record_ind = 1
+    where ch.dw_customer_id is null
 ),
 
 updated_customers as (
