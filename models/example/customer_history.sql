@@ -39,11 +39,11 @@ updated_customers as (
             else ch.dw_update_timestamp
         end as updated_dw_update_timestamp,
         case
-            when C.creditLimit <> ch.creditLimit then {{ source('etl_metadata', 'batch_control') }}.etl_batch_no
+            when C.creditLimit <> ch.creditLimit then B.etl_batch_no
             else ch.update_etl_batch_no
         end as update_etl_batch_no,
         case
-            when C.creditLimit <> ch.creditLimit then {{ source('etl_metadata', 'batch_control') }}.etl_batch_date
+            when C.creditLimit <> ch.creditLimit then B.etl_batch_date
             else ch.update_etl_batch_date
         end as update_etl_batch_date,
         case
@@ -53,6 +53,7 @@ updated_customers as (
     from
         {{ this }} ch
     left join {{ ref('customers') }} C on ch.dw_customer_id = C.dw_customer_id
+    cross join {{ source('etl_metadata', 'batch_control')}} B
     where ch.dw_active_record_ind = 1
 )
 
