@@ -15,6 +15,7 @@ with new_customers as (
         {{ ref('customers') }} C
     left join {{ this }} ch on C.dw_customer_id = ch.dw_customer_id
                             and ch.dw_active_record_ind = 1
+                            and C.creditLimit <> ch.creditLimit
     cross join {{ source('etl_metadata', 'batch_control') }} B
     where ch.dw_customer_id is null
 ),
