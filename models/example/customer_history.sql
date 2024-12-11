@@ -15,7 +15,6 @@ with new_customers as (
         {{ ref('customers') }} C
     left join {{ this }} ch on C.dw_customer_id = ch.dw_customer_id
                             and ch.dw_active_record_ind = 1
-                            and C.creditLimit <> ch.creditLimit
     cross join {{ source('etl_metadata', 'batch_control') }} B
     where ch.dw_customer_id is null
 ),
@@ -56,6 +55,20 @@ updated_customers as (
     left join {{ ref('customers') }} C on ch.dw_customer_id = C.dw_customer_id
     cross join {{ source('etl_metadata', 'batch_control')}} B
     where ch.dw_active_record_ind = 1
+),
+
+changed_data as (
+    select C.dw_customer_id,
+            C.creditLimit, 
+            B.etl_batch_date AS effective_from_date,
+            1 AS dw_active_record_ind,
+            current_timestamp as dw_create_timestamp,
+            B.etl_batch_no AS create_etl_batch_no,
+            B.etl_batch_date AS create_etl_batch_date
+    from {{ ref('customers') }} C 
+    cross join {{ source('etl_metadata', 'batch_control')}} B
+        where C.etl_batch_no = B.etl_batch_no
+        and C.src_create_timestamp <> C.src_update_timestamp
 )
 
 -- Combine the new customers (insert) and updated records (update)
@@ -88,3 +101,18 @@ select
     null as dw_update_timestamp
 from
     new_customers
+union all
+select dw_customer_id,
+        creditLimit,
+        effective_from_date,
+        null as effective_to_date
+        dw_active_record_ind,
+        create_etl_batch_no,
+        create_etl_batch_date,
+        null as update_etl_batch_no,
+        null as update_etl_batch_date,
+        dw_create_timestamp,
+        null as dw_update_timestamp
+from 
+    changed_data
+
