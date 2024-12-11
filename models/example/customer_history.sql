@@ -50,7 +50,7 @@ updated_customers as (
             else ch.effective_to_date
         end as updated_effective_to_date
     from
-        {{ ref('customer_history') }} ch
+        {{ this }} ch
     left join {{ ref('customers') }} C on ch.dw_customer_id = C.dw_customer_id
     where ch.dw_active_record_ind = 1
 )
