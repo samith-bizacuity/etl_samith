@@ -75,6 +75,6 @@ select
     etl_batch_date as effective_from_date,
     1 as dw_active_record_ind,
     etl_batch_no as create_etl_batch_no,
-    etl_batch_date as create_etl_batch_date,
+    etl_batch_date as create_etl_batch_date
 from
     new_customers
