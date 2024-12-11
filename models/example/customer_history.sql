@@ -59,6 +59,7 @@ updated_customers as (
 select
     dw_customer_id,
     creditLimit,
+    effective_from_date,
     updated_effective_to_date as effective_to_date,
     updated_dw_active_record_ind as dw_active_record_ind,
     create_etl_batch_no,
@@ -73,8 +74,12 @@ select
     dw_customer_id,
     creditLimit,
     etl_batch_date as effective_from_date,
+    null as effective_to_date,
     1 as dw_active_record_ind,
     etl_batch_no as create_etl_batch_no,
-    etl_batch_date as create_etl_batch_date
+    etl_batch_date as create_etl_batch_date,
+    null as update_etl_batch_no,
+    null as update_etl_batch_date,
+    null as dw_update_timestamp
 from
     new_customers
