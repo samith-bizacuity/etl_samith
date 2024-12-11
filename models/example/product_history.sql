@@ -19,7 +19,7 @@ with new_products as (
 ),
 
 updated_products as (
-    -- Update existing records where creditLimit has changed
+    -- Update existing records where msrp has changed
     select
         ph.dw_product_id,
         ph.dw_active_record_ind,
@@ -74,7 +74,7 @@ from
 union all
 select
     dw_product_id,
-    creditLimit,
+    msrp,
     etl_batch_date as effective_from_date,
     null as effective_to_date,
     1 as dw_active_record_ind,
