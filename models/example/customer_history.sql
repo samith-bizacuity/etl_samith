@@ -1,6 +1,5 @@
 {{ config(
     materialized='incremental',
-    unique_key='dw_customer_id'
 ) }}
 
 with new_customers as (
