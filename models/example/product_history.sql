@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key='dw_product_id'
+    unique_key=['dw_product_id', 'msrp']
 ) }}
 
 with new_products as (
@@ -14,8 +14,9 @@ with new_products as (
     from
         {{ ref('products') }} P
     left join {{ this }} ph on P.dw_product_id = ph.dw_product_id
+                            and ph.dw_active_record_ind = 1
     cross join {{ source('etl_metadata', 'batch_control') }} B
-    where ph.dw_product_id is null or ph.dw_active_record_ind = 1
+    where ph.dw_product_id is null
 ),
 
 updated_products as (
@@ -30,7 +31,7 @@ updated_products as (
         ph.create_etl_batch_date,
         ph.dw_create_timestamp,
         case
-            when P.msrp <> ph.msrp then 0  -- mark for update
+            when P.msrp <> ph.msrp then 0  
             else ph.dw_active_record_ind
         end as updated_dw_active_record_ind,
         case
@@ -46,7 +47,7 @@ updated_products as (
             else ph.update_etl_batch_date
         end as update_etl_batch_date,
         case
-            when P.msrp <> ph.msrp then current_timestamp - INTERVAL '1 day'
+            when P.msrp <> ph.msrp then B.etl_batch_date - INTERVAL '1 day'
             else ph.effective_to_date
         end as updated_effective_to_date
     from
