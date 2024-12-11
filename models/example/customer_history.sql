@@ -67,8 +67,10 @@ changed_data as (
             B.etl_batch_date AS create_etl_batch_date
     from {{ ref('customers') }} C 
     cross join {{ source('etl_metadata', 'batch_control')}} B
+    join {{ this }} ch on C.dw_customer_id = ch.dw_customer_id
         where C.etl_batch_no = B.etl_batch_no
         and C.src_create_timestamp <> C.src_update_timestamp
+        and C.creditLimit <> ch.creditLimit
 )
 
 -- Combine the new customers (insert) and updated records (update)
