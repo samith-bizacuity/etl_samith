@@ -51,7 +51,7 @@ SELECT C.summary_date,
     MAX(C.cancelled_product_qty) AS cancelled_product_qty,
     MAX(C.cancelled_cost_amount) AS cancelled_cost_amount,
     MAX(C.cancelled_mrp_amount) AS cancelled_mrp_amount,
-    MAX(C.ancelled_order_apd) AS cancelled_order_apd,
+    MAX(C.cancelled_order_apd) AS cancelled_order_apd,
     CURRENT_TIMESTAMP AS dw_create_timestamp,
     B.etl_batch_no AS etl_batch_no,  
     B.etl_batch_date AS etl_batch_date  
