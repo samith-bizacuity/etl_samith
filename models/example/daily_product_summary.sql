@@ -1,6 +1,5 @@
 {{ config(
-    materialized='incremental',
-    unique_key=['summary_date', 'dw_product_id']
+    materialized='incremental'
 ) }}
 
 WITH CTE AS
