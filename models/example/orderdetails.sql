@@ -19,7 +19,7 @@ with ranked_data as (
             when ed.src_orderNumber is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
-        row_number() over (order by sd.ordernumber, sd.productcode) + coalesce(max(ed.dw_orderdetail_id) over (), 0) as dw_orderdetail_id,
+        coalesce(ed.dw_orderdetail_id,row_number() over (order by sd.ordernumber, sd.productcode) + coalesce(max(ed.dw_orderdetail_id) over (), 0)) as dw_orderdetail_id,
         coalesce(o.dw_order_id, ed.dw_order_id) as dw_order_id,
         coalesce(p.dw_product_id, ed.dw_product_id) as dw_product_id 
     from

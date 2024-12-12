@@ -19,7 +19,7 @@ with ranked_data as (
             when ed.checknumber is null and ed.src_customernumber is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
-        row_number() over (order by sd.checknumber) + coalesce(max(ed.dw_payment_id) over (), 0) as dw_payment_id
+        coalesce(ed.dw_payment_id,row_number() over (order by sd.checknumber) + coalesce(max(ed.dw_payment_id) over (), 0)) as dw_payment_id
     from
         {{ source('devstage', 'Payments')}} sd
     left join {{ this }} ed on sd.checknumber = ed.checknumber

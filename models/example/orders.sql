@@ -21,7 +21,7 @@ with ranked_data as (
             when ed.src_ordernumber is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
-        row_number() over (order by sd.ordernumber) + coalesce(max(ed.dw_order_id) over (), 0) as dw_order_id,
+        coalesce(ed.dw_order_id,row_number() over (order by sd.ordernumber) + coalesce(max(ed.dw_order_id) over (), 0)) as dw_order_id,
         coalesce(ed.dw_customer_id, c.dw_customer_id) as dw_customer_id
     from
         {{ source('devstage', 'Orders') }} sd

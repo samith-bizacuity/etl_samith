@@ -23,7 +23,7 @@ with ranked_data as (
             when ed.employeenumber is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
-        row_number() over (order by sd.employeenumber) + coalesce(max(ed.dw_employee_id) over (), 0) as dw_employee_id,
+        coalesce(ed.dw_employee_id, row_number() over (order by sd.employeenumber) + coalesce(max(ed.dw_employee_id) over (), 0)) as dw_employee_id,
         0 as dw_reporting_employee_id
     from
         {{ source('devstage', 'Employees')}} sd

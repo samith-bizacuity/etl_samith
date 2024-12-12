@@ -23,7 +23,7 @@ WITH new_data AS (
         END AS dw_create_timestamp,
         B.etl_batch_no,  -- Pass in ETL batch number via variable
         B.etl_batch_date,  -- Pass in ETL batch date via variable
-        ROW_NUMBER() OVER (ORDER BY A.productCode) + COALESCE(MAX(e.dw_product_id) OVER (), 0) AS dw_product_id
+        coalesce(e.dw_product_id, ROW_NUMBER() OVER (ORDER BY A.productCode) + COALESCE(MAX(e.dw_product_id) OVER (), 0)) AS dw_product_id
     FROM {{ source('devstage', 'Products') }} A
     JOIN {{ ref('productlines') }} PL ON A.productLine = PL.productLine
     LEFT JOIN {{ this }} e ON A.productCode = e.src_productCode
