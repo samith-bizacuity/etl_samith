@@ -58,4 +58,6 @@ SELECT C.summary_date,
 FROM CTE C
 cross join {{source("etl_metadata", 'batch_control')}} B
 GROUP BY C.summary_date,
-        C.dw_product_id
+        C.dw_product_id,
+        B.etl_batch_no,
+        B.etl_batch_date
