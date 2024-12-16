@@ -3,7 +3,11 @@
     unique_key='src_customerNumber'
 ) }}
 
-with ranked_data as (
+with max_dw_id as (
+    SELECT max(dw_customer_id) AS mid
+    FROM {{ this }}
+),
+ranked_data as (
     select
         sd.customernumber as src_customernumber,
         sd.customername,
@@ -28,12 +32,13 @@ with ranked_data as (
             when ed.src_customernumber is null then current_timestamp
             else ed.dw_create_timestamp
         end as dw_create_timestamp,
-        coalesce(ed.dw_customer_id, row_number() over (order by sd.customernumber) + coalesce(max(ed.dw_customer_id) over (), 0)) as dw_customer_id
+        coalesce(ed.dw_customer_id, row_number() over (order by sd.customernumber) + coalesce(max_dw_id.mid over (), 0)) as dw_customer_id
     from
         {{ source('devstage', 'Customers')}} sd
     left join {{ this }} ed on sd.customernumber = ed.src_customernumber
     left join {{ ref('employees') }} e on sd.salesrepemployeenumber = e.employeenumber
     cross join {{ source('etl_metadata', 'batch_control')}} em
+    cross join max_dw_id
 )
 
 select *
