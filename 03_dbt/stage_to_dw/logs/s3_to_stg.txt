@@ -1,0 +1,128 @@
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 08:43:27, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 08:43:39, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 08:43:41, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 08:43:44, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 08:43:46, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 08:43:47, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 08:43:53, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 08:43:55, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 08:50:43, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 08:50:44, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 08:50:55, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 08:51:00, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 08:51:01, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 08:51:03, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 08:51:05, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 08:51:08, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 08:57:24
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 08:57:24
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 08:57:24
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 08:57:26
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 08:57:29
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 08:57:30
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 08:57:31
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 08:57:33
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 08:58:46, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 08:58:44, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 08:58:49, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 08:58:49, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 08:58:52, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 08:58:57, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 08:58:57, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 08:59:04, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 10:16:33
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 10:16:33
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 10:16:35
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 10:16:38
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 10:16:39
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 10:16:40
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 10:16:40
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 10:16:41
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 10:19:02, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 10:19:11, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 10:19:13, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 10:19:14, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 10:19:14, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 10:19:16, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 10:19:20, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 10:19:29, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 10:29:34
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 10:29:34
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 10:29:34
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 10:29:34
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 10:29:35
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 10:29:35
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 10:29:41
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 10:29:46
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 10:31:09, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 10:31:19, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 10:31:27, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 10:31:35, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 10:31:38, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 10:31:39, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 10:31:40, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 10:31:49, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 10:39:49
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 10:39:49
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 10:39:49
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 10:39:50
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 10:39:53
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 10:39:55
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 10:40:02
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 10:40:06
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 10:41:57, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 10:42:03, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 10:42:06, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 10:42:08, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 10:42:08, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 10:42:11, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 10:42:12, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 10:42:19, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 10:48:29
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 10:48:29
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 10:48:29
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 10:48:30
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 10:48:30
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 10:48:34
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 10:48:41
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 10:48:43
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 10:50:09, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 10:50:28, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 10:50:30, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 10:50:31, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 10:50:34, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 10:50:34, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 10:50:35, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 10:50:36, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 10:56:47
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 10:56:47
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 10:56:49
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 10:56:52
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 10:56:57
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 10:56:57
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 10:57:00
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 10:57:00
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 10:58:36, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 10:58:49, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 10:58:51, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 10:58:56, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 10:58:57, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 10:59:02, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 10:59:02, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 10:59:09, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments started at 2024-12-16 11:03:25
+Task s3_to_stg.s3_to_stg_gluejob_employees started at 2024-12-16 11:03:25
+Task s3_to_stg.s3_to_stg_gluejob_orders started at 2024-12-16 11:03:27
+Task s3_to_stg.s3_to_stg_gluejob_products started at 2024-12-16 11:03:27
+Task s3_to_stg.s3_to_stg_gluejob_productlines started at 2024-12-16 11:03:27
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails started at 2024-12-16 11:03:30
+Task s3_to_stg.s3_to_stg_gluejob_offices started at 2024-12-16 11:03:31
+Task s3_to_stg.s3_to_stg_gluejob_customers started at 2024-12-16 11:03:32
+Task s3_to_stg.s3_to_stg_gluejob_productlines ended at 2024-12-16 11:05:06, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_products ended at 2024-12-16 11:05:17, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_payments ended at 2024-12-16 11:05:34, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orderdetails ended at 2024-12-16 11:05:39, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_customers ended at 2024-12-16 11:05:44, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_orders ended at 2024-12-16 11:05:46, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_employees ended at 2024-12-16 11:05:47, Status: SUCCESS
+Task s3_to_stg.s3_to_stg_gluejob_offices ended at 2024-12-16 11:05:57, Status: SUCCESS

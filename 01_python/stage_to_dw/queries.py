@@ -314,7 +314,6 @@ queries = {
             productLine = A.productLine,
             productScale = A.productScale,
             productVendor = A.productVendor,
-            productDescription = A.productDescription,
             quantityInStock = A.quantityInStock,
             buyPrice = A.buyPrice,
             MSRP = A.MSRP,
@@ -335,7 +334,6 @@ queries = {
             productLine,
             productScale,
             productVendor,
-            productDescription,
             quantityInStock,
             buyPrice,
             MSRP,
@@ -351,7 +349,6 @@ queries = {
             A.productLine,
             A.productScale,
             A.productVendor,
-            A.productDescription,
             A.quantityInStock,
             A.buyPrice,
             A.MSRP,
@@ -371,7 +368,6 @@ queries = {
         """
         UPDATE devdw.ProductLines B
         SET 
-            textDescription = A.textDescription,
             src_update_timestamp = A.update_timestamp,
             dw_update_timestamp = CURRENT_TIMESTAMP,
             etl_batch_no = %s,  -- for etl_batch_no
@@ -383,7 +379,6 @@ queries = {
         INSERT INTO devdw.ProductLines
         (
             productLine,
-            textDescription,
             src_create_timestamp,
             src_update_timestamp,
             etl_batch_no,
@@ -391,7 +386,6 @@ queries = {
         )
         SELECT 
             A.productLine,
-            A.textDescription,
             A.create_timestamp,
             A.update_timestamp,
             %s,  -- for etl_batch_no

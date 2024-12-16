@@ -1,0 +1,18 @@
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 08:44:03
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 08:45:56, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 08:51:18
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 08:53:10, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 08:59:13
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 09:00:11, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 10:19:49
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 10:21:43, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 10:32:10
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 10:33:09, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 10:42:37
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 10:43:36, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 10:50:56
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 10:51:54, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 10:59:18
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 11:00:16, Status: SUCCESS
+Task trigger_dbt_cloud_job_stg_to_dw started at 2024-12-16 11:06:12
+Task trigger_dbt_cloud_job_stg_to_dw ended at 2024-12-16 11:07:10, Status: SUCCESS

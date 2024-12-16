@@ -1,0 +1,101 @@
+version: 2
+
+sources:
+  - name: etl_metadata
+    schema: etl_metadata
+    tables:
+      - name: batch_control
+        columns: 
+          - name: etl_batch_no
+          - name: etl_batch_date
+
+  - name: devstage
+    schema: devstage
+    tables:
+      - name: Offices
+        columns:
+          - name: officeCode
+          - name: city
+          - name: phone
+          - name: addressLine1
+          - name: addressLine2
+          - name: state
+          - name: country
+          - name: postalCode
+          - name: territory
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: Employees
+        columns:
+          - name: employeeNumber
+          - name: lastName
+          - name: firstName
+          - name: extension
+          - name: email
+          - name: officeCode
+          - name: reportsTo
+          - name: jobTitle
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: Customers
+        columns:
+          - name: customerNumber
+          - name: customerName
+          - name: contactLastName
+          - name: contactFirstName
+          - name: phone
+          - name: addressLine1
+          - name: addressLine2
+          - name: city
+          - name: state
+          - name: country
+          - name: postalCode
+          - name: salesRepEmployeeNumber
+          - name: creditLimit
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: Payments
+        columns:
+          - name: customerNumber
+          - name: checkNumber
+          - name: paymentDate
+          - name: amount
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: Orders
+        columns:
+          - name: orderNumber
+          - name: orderDate
+          - name: requiredDate
+          - name: shippedDate
+          - name: status
+          - name: customerNumber
+          - name: cancelledDate
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: ProductLines
+        columns:
+          - name: productline
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: Products
+        columns:
+          - name: productCode
+          - name: productName
+          - name: productLine
+          - name: productScale
+          - name: productVendor
+          - name: quantityInStock
+          - name: buyPrice
+          - name: MSRP
+          - name: create_timestamp
+          - name: update_timestamp
+      - name: OrderDetails
+        columns:
+          - name: orderNumber
+          - name: productCode
+          - name: quantityOrdered
+          - name: priceEach
+          - name: orderLineNumber
+          - name: create_timestamp
+          - name: update_timestamp

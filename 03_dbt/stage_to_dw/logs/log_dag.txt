@@ -1,0 +1,21 @@
+DAG started at 2024-12-16 08:40:54
+DAG ended at 2024-12-16 08:46:08, Duration: 0:00:00.082443 Status: SUCCESS
+DAG started at 2024-12-16 08:48:04
+DAG ended at 2024-12-16 08:53:24, Duration: 0:00:00.080260 Status: SUCCESS
+DAG started at 2024-12-16 08:56:00
+DAG ended at 2024-12-16 09:00:22, Duration: 0:00:00.091406 Status: SUCCESS
+DAG started at 2024-12-16 10:10:41
+DAG ended at 2024-12-16 10:11:21, Duration: 0:00:00.216158 Status: FAILED
+DAG started at 2024-12-16 10:14:01
+DAG ended at 2024-12-16 10:22:14, Duration: 0:00:00.218630 Status: SUCCESS
+DAG ended at 2024-12-16 10:27:09, Duration: 0:00:00.277054 Status: FAILED
+DAG started at 2024-12-16 10:27:13
+DAG ended at 2024-12-16 10:33:41, Duration: 0:00:00.222778 Status: SUCCESS
+DAG started at 2024-12-16 10:37:15
+DAG ended at 2024-12-16 10:44:06, Duration: 0:00:00.239756 Status: SUCCESS
+DAG started at 2024-12-16 10:45:46
+DAG ended at 2024-12-16 10:52:23, Duration: 0:00:00.230118 Status: SUCCESS
+DAG started at 2024-12-16 10:54:15
+DAG ended at 2024-12-16 11:00:31, Duration: 0:00:00.111945 Status: SUCCESS
+DAG started at 2024-12-16 11:01:50
+DAG ended at 2024-12-16 11:07:29, Duration: 0:00:00.140654 Status: SUCCESS
